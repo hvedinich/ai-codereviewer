@@ -93,6 +93,7 @@ function analyzeCode(parsedDiff, prDetails) {
                 continue; // Ignore deleted files
             for (const chunk of file.chunks) {
                 const prompt = createPrompt(file, chunk, prDetails);
+                console.log({ prompt });
                 const aiResponse = yield getAIResponse(prompt);
                 if (aiResponse) {
                     const newComments = createComment(file, chunk, aiResponse);
@@ -106,13 +107,14 @@ function analyzeCode(parsedDiff, prDetails) {
     });
 }
 function createPrompt(file, chunk, prDetails) {
-    return `Your task is to review pull requests. Instructions:
-- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
-- Do not give positive comments or compliments.
-- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
-- Write the comment in GitHub Markdown format.
-- Use the given description only for the overall context and only comment the code.
-- IMPORTANT: NEVER suggest adding comments to the code.
+    return `Your task is to review pull requests for a React Next.js application that uses Chakra UI for styling and follows the Feature-Sliced Design methodology. Instructions:
+  - Provide the response in the following JSON format: {"reviews": [{"lineNumber": <line_number>, "reviewComment": "<review comment>"}]}
+  - Do not give positive comments or compliments.
+  - Provide comments and suggestions ONLY if there is something substantive to improve, focusing on critical aspects such as functionality, performance, security, and code architecture. Consider the best practices and conventions for React, Next.js, Chakra UI, and Feature-Sliced Design.
+  - Avoid suggestions that are purely stylistic (e.g., ESLint recommendations, variable existence checks, or minor UI changes like font size adjustments) unless they significantly impact the code's functionality or maintainability.
+  - Write comments in GitHub Markdown format.
+  - Use the given description only for the overall context and focus on reviewing the code itself.
+  - IMPORTANT: NEVER suggest adding comments to the code. Instead, focus on improving the logic, structure, and implementation of the code.  
 
 Review the following code diff in the file "${file.to}" and take the pull request title and description into account when writing the response.
   
