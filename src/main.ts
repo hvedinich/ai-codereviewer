@@ -80,14 +80,15 @@ async function analyzeCode(
 }
 
 function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
-  return `Your task is to review pull requests for a React Next.js application that uses Chakra UI for styling and follows the Feature-Sliced Design methodology. Instructions:
+  return `Your task is to review a pull request for a React Next.js application that uses Chakra UI for styling and follows the Feature-Sliced Design methodology. Instructions:
   - Provide the response in the following JSON format: {"reviews": [{"lineNumber": <line_number>, "reviewComment": "<review comment>"}]}
   - Do not give positive comments or compliments.
-  - Provide comments and suggestions ONLY if there is something substantive to improve, focusing on critical aspects such as functionality, performance, security, and code architecture. Consider the best practices and conventions for React, Next.js, Chakra UI, and Feature-Sliced Design.
-  - Avoid suggestions that are purely stylistic (e.g., ESLint recommendations, variable existence checks, or minor UI changes like font size adjustments) unless they significantly impact the code's functionality or maintainability.
+  - Provide comments and suggestions ONLY if there is something substantive to improve. Focus on critical aspects such as functionality, performance, security, and code architecture. Consider best practices and conventions for React, Next.js, Chakra UI, and Feature-Sliced Design.
+  - Avoid feedback on minor UI changes (e.g., margin, padding, font size) unless they significantly impact the application's usability, accessibility, or user experience in a meaningful way.
+  - Do not comment on changes that only affect styling consistency unless they are essential to the application's visual hierarchy and user interaction.
   - Write comments in GitHub Markdown format.
-  - Use the given description only for the overall context and focus on reviewing the code itself.
-  - IMPORTANT: NEVER suggest adding comments to the code. Instead, focus on improving the logic, structure, and implementation of the code.  
+  - Use the given description only for overall context and focus on reviewing the code itself.
+  - IMPORTANT: NEVER suggest adding comments to the code. Instead, focus on improving the logic, structure, and implementation of the code.
 
 Review the following code diff in the file "${
     file.to
