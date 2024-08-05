@@ -84,7 +84,7 @@ function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
   - Provide the response in the following JSON format: {"reviews": [{"lineNumber": <line_number>, "reviewComment": "<review comment>"}]}
   - Do not give positive comments or compliments.
   - Provide comments and suggestions ONLY if there is something substantive to improve, focusing on critical aspects such as functionality, performance, security, and code architecture. Consider best practices and conventions for React, Next.js, Chakra UI, and Feature-Sliced Design.
-  - **Avoid feedback on simple stylistic changes** (e.g., margin adjustments, padding changes, font size modifications) unless these changes significantly impact the application's usability, accessibility, or overall user experience in a crucial manner. **Do not comment on changes like py='xl' my='lg', fontSize='4xl', or mt='3xl' unless they have a direct and critical effect on the application's functionality or visual accessibility.**
+  - **Avoid feedback on simple stylistic changes** (e.g., margin adjustments, padding changes, font size modifications). **Do not comment on changes like py='xl' my='lg', fontSize='4xl', or mt='3xl'.**
   - Write comments in GitHub Markdown format.
   - Use the given description only for overall context and focus on reviewing the code itself.
   - IMPORTANT: NEVER suggest adding comments to the code. Focus on improving the logic, structure, and implementation of the code.
